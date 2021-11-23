@@ -1,5 +1,5 @@
 """"""""""""""""""
-"" Welcome to the VIM configuration
+"" Welcome to the NEOVIM configuration
 "" by jponferrada
 """""""""""""""""""
 
@@ -16,55 +16,51 @@ let mapleader = ','
 "" PLUGINS
 
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-""" manager plugins
-Plugin 'gmarik/Vundle.vim'
+call plug#begin()
 
 """ searches for files within current folder
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 
 """ opens files menu
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 """ toggles commenT
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 
 """ shows status bar
-Plugin 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
 
 """ theme color
-Plugin 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 
 """ adds shortcuts for calling git commands
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 """ package icons for dev
-Plugin 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 
 """ draws changes git
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 
 """ linter
-Plugin 'w0rp/ale'
+Plug 'w0rp/ale'
 
 """ syntax pug files
-Plugin 'digitaltoad/vim-pug'
+Plug 'digitaltoad/vim-pug'
 
 """ syntax vue files
-Plugin 'posva/vim-vue'
+Plug 'posva/vim-vue'
 
 """ syntax ES6 
-Plugin 'isRuslan/vim-es6'
+Plug 'isRuslan/vim-es6'
 
 """ autocomplete code
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 """ search texts inside files
-Plugin 'gabesoft/vim-ags'
+Plug 'gabesoft/vim-ags'
 
-call vundle#end()
+call plug#end()
 filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -81,10 +77,6 @@ let NERDTreeShowHidden=1
 """ [Nerdcommenter]
 let g:NERDSpaceDelims = 1
 let g:NERDDefaultAlign = 'left'
-
-" let g:gruvbox_termcolors=16
-""" [Vim-colors-solarized]
-" let g:solarized_termcolors=16
 
 """ [Ale]
 let g:ale_linters = {
