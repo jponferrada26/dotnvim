@@ -60,6 +60,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 """ search texts inside files
 Plug 'gabesoft/vim-ags'
 
+""" pretty format
+Plug 'sbdchd/neoformat'
+
 call plug#end()
 filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -95,6 +98,11 @@ let g:coc_global_extensions = [
   \ 'coc-prettier', 
   \ 'coc-json', 
   \ ]
+
+""" [neoformat(pretty)]
+" local version .node_modules
+let g:neoformat_try_node_exe = 1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -146,6 +154,9 @@ set noswapfile
 
 """ shares clipboard system
 set clipboard=unnamedplus
+
+""" apply changes on save [neoformat(pretty)]
+autocmd BufWritePre *.{js,ts,tsx} Neoformat 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -183,4 +194,16 @@ noremap <C-e> :NERDTreeToggle<CR>
 """ call [Ags] (ignore node_modules)
 noremap <Leader>f :Ags --ignore-dir=node_modules<Space>
 noremap <Leader><Leader>f :AgsQuit<CR>
+
+""" go to definition module. [Coc.nvim]
+nmap <silent> gd :vs<CR><Plug>(coc-definition)
+
+" Remap keys for applying codeAction to the current buffer. [Coc.nvim]
+nmap <leader>ac  <Plug>(coc-codeaction)
+
+" Apply AutoFix to problem on the current line. [Coc.nvim]
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Symbol renaming.[Coc.nvim]
+nmap <leader>rn <Plug>(coc-rename)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
