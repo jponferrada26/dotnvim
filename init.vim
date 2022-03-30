@@ -188,8 +188,11 @@ nmap <C-d> YP<CR>
 """ back cursor
 map w b
 
-""" toogle [NerdTree]
+""" toggle [NerdTree]
 noremap <C-e> :NERDTreeToggle<CR>
+
+""" find actual file [NerdTree]
+noremap <C-f> :NERDTreeFind<CR>
 
 """ call [Ags] (ignore node_modules)
 noremap <Leader>f :Ags --ignore-dir=node_modules<Space>
