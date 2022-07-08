@@ -42,14 +42,11 @@ Plug 'ryanoasis/vim-devicons'
 """ draws changes git
 Plug 'airblade/vim-gitgutter'
 
-""" linter
-Plug 'w0rp/ale'
-
 """ syntax pug files
 Plug 'digitaltoad/vim-pug'
 
-""" syntax vue files
-Plug 'posva/vim-vue'
+""" syntax typescript files
+Plug 'HerringtonDarkholme/yats.vim'
 
 """ syntax ES6 
 Plug 'isRuslan/vim-es6'
@@ -81,14 +78,6 @@ let NERDTreeShowHidden=1
 let g:NERDSpaceDelims = 1
 let g:NERDDefaultAlign = 'left'
 
-""" [Ale]
-let g:ale_linters = {
-\   'javascript': ['eslint']
-\}
-let g:ale_sign_error = '❌'
-let g:ale_sign_warning = '⚠️'
-let g:airline#extensions#ale#enabled = 1
-let g:ale_lint_on_text_changed = 'never'
 
 """ [Coc.nvim]
 let g:coc_global_extensions = [
@@ -97,7 +86,12 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-prettier', 
   \ 'coc-json', 
+  \ 'coc-eslint', 
   \ ]
+let g:coc_user_config = {
+	\ 'diagnostic.errorSign': '❌',
+  \ 'diagnostic.warningSign': '⚠️',
+\ }
 
 """ [neoformat(pretty)]
 " local version .node_modules
@@ -209,4 +203,16 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Symbol renaming.[Coc.nvim]
 nmap <leader>rn <Plug>(coc-rename)
+
+" Use K to show documentation in preview window. [Coc.nvim]
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
