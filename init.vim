@@ -42,14 +42,8 @@ Plug 'ryanoasis/vim-devicons'
 """ draws changes git
 Plug 'airblade/vim-gitgutter'
 
-""" syntax pug files
-Plug 'digitaltoad/vim-pug'
-
-""" syntax typescript files
-Plug 'HerringtonDarkholme/yats.vim'
-
-""" syntax ES6 
-Plug 'isRuslan/vim-es6'
+""" syntax code files
+Plug 'sheerun/vim-polyglot'
 
 """ autocomplete code
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -69,7 +63,7 @@ filetype plugin indent on
 "" PLUGINS SETTINGS
 
 """ [CtrlP]
-let g:ctrlp_custom_ignore = 'node_modules\|client/node_modules\|.git'
+let g:ctrlp_custom_ignore = 'lib\|node_modules\|*/node_modules\|dist\|.git\'
 
 """ [Nerdtree]
 let NERDTreeShowHidden=1
@@ -87,16 +81,18 @@ let g:coc_global_extensions = [
   \ 'coc-prettier', 
   \ 'coc-json', 
   \ 'coc-eslint', 
+  \ 'coc-vetur', 
+  \ 'coc-css', 
   \ ]
 let g:coc_user_config = {
 	\ 'diagnostic.errorSign': '❌',
   \ 'diagnostic.warningSign': '⚠️',
+  \ 'typescript.preferences.importModuleSpecifier': 'project-relative'
 \ }
 
 """ [neoformat(pretty)]
 " local version .node_modules
 let g:neoformat_try_node_exe = 1
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -114,6 +110,9 @@ set cursorcolumn "crosshair: Y
 set number "line numbers
 set belloff=all "no bells
 set laststatus=2 "make airline always visible
+set colorcolumn=100 "Show line at 100 characters
+set listchars=tab:\|\ 
+set list
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -150,7 +149,10 @@ set noswapfile
 set clipboard=unnamedplus
 
 """ apply changes on save [neoformat(pretty)]
-autocmd BufWritePre *.{js,ts,tsx} Neoformat 
+autocmd BufWritePre *.{js,ts,tsx,vue} Neoformat 
+
+""" add support for scss
+autocmd FileType scss setl iskeyword+=@-@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -203,6 +205,9 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Symbol renaming.[Coc.nvim]
 nmap <leader>rn <Plug>(coc-rename)
+
+" always suppress the newline after I select a suggestion with the Enter key
+inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 
 " Use K to show documentation in preview window. [Coc.nvim]
 nnoremap <silent> K :call <SID>show_documentation()<CR>
