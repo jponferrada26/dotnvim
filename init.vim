@@ -18,9 +18,6 @@ let mapleader = ','
 filetype off
 call plug#begin()
 
-""" searches for files within current folder
-Plug 'kien/ctrlp.vim'
-
 """ opens files menu
 Plug 'scrooloose/nerdtree'
 
@@ -48,11 +45,12 @@ Plug 'sheerun/vim-polyglot'
 """ autocomplete code
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-""" search texts inside files
-Plug 'gabesoft/vim-ags'
-
 """ pretty format
 Plug 'sbdchd/neoformat'
+
+""" search files and texts
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 filetype plugin indent on
@@ -62,8 +60,11 @@ filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" PLUGINS SETTINGS
 
-""" [CtrlP]
-let g:ctrlp_custom_ignore = 'lib\|node_modules\|*/node_modules\|dist\|.git\'
+""" use 'ag' for ignore directories [fzf.vim]
+let $FZF_DEFAULT_COMMAND='ag -g "" --ignore-dir node_modules --ignore-dir dist --ignore-dir .git'
+
+""" ignore directories using 'ag' for search text [fzf.vim]
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--ignore=node_modules --ignore=dist --ignore=.git', fzf#vim#with_preview(), <bang>0)
 
 """ [Nerdtree]
 let NERDTreeShowHidden=1
@@ -190,26 +191,37 @@ noremap <C-e> :NERDTreeToggle<CR>
 """ find actual file [NerdTree]
 noremap <C-f> :NERDTreeFind<CR>
 
-""" call [Ags] (ignore node_modules)
-noremap <Leader>f :Ags --ignore-dir=node_modules<Space>
-noremap <Leader><Leader>f :AgsQuit<CR>
-
 """ go to definition module. [Coc.nvim]
 nmap <silent> gd :vs<CR><Plug>(coc-definition)
 
-" Remap keys for applying codeAction to the current buffer. [Coc.nvim]
+""" go to references module. [Coc.nvim]
+nmap <silent> gf <Plug>(coc-references)
+
+""" Remap keys for applying codeAction to the current buffer. [Coc.nvim]
 nmap <leader>ac  <Plug>(coc-codeaction)
 
-" Apply AutoFix to problem on the current line. [Coc.nvim]
+""" Apply AutoFix to problem on the current line. [Coc.nvim]
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Symbol renaming.[Coc.nvim]
+""" Symbol renaming.[Coc.nvim]
 nmap <leader>rn <Plug>(coc-rename)
 
-" always suppress the newline after I select a suggestion with the Enter key
+""" open new empty tab
+nmap <Leader>t :tab new<CR>
+
+""" search only files [fzf.vim]
+nmap <C-p> :Files<CR>
+
+""" search texts [fzf.vim]
+nmap <c-k> :Ag<CR>
+
+""" open new tab with file selected [fzf.vim]
+nnoremap <silent> <C-t> :tabe <C-R>=fnameescape(fzf#vim#selected())<CR><CR>
+
+""" always suppress the newline after I select a suggestion with the Enter key
 inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 
-" Use K to show documentation in preview window. [Coc.nvim]
+""" Use K to show documentation in preview window. [Coc.nvim]
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)

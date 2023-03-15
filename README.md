@@ -12,3 +12,9 @@ curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubuserc
 1. Run nvim
 2. Run :PlugInstall
 3. Restart nvim for apply changes
+
+### Points to note
+* since the `ryanoasis/vim-devicons` plugin is used for icon management and it requires these [fonts](https://github.com/ryanoasis/nerd-fonts), it is advised to use `MesloLGM`.
+
+### Requirements
+* have `node` or `python` for the `coc` plugin utilities.
