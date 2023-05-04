@@ -45,6 +45,9 @@ Plug 'sheerun/vim-polyglot'
 """ autocomplete code
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+""" search texts inside files
+Plug 'gabesoft/vim-ags'
+
 """ pretty format
 Plug 'sbdchd/neoformat'
 
@@ -63,16 +66,12 @@ filetype plugin indent on
 """ use 'ag' for ignore directories [fzf.vim]
 let $FZF_DEFAULT_COMMAND='ag -g "" --ignore-dir node_modules --ignore-dir dist --ignore-dir .git'
 
-""" ignore directories using 'ag' for search text [fzf.vim]
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--ignore=node_modules --ignore=dist --ignore=.git', fzf#vim#with_preview(), <bang>0)
-
 """ [Nerdtree]
 let NERDTreeShowHidden=1
 
 """ [Nerdcommenter]
 let g:NERDSpaceDelims = 1
 let g:NERDDefaultAlign = 'left'
-
 
 """ [Coc.nvim]
 let g:coc_global_extensions = [
@@ -154,17 +153,12 @@ autocmd BufWritePre *.{js,ts,tsx,vue} Neoformat
 
 """ add support for scss
 autocmd FileType scss setl iskeyword+=@-@
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" KEYBOARD SHORTCUTS
-
-""" swith between .pug and .js
-nnoremap <Leader>a :e %:p:s,.js$,.X123X,:s,.pug$,.js,:s,.X123X$,.pug,<CR>
-nnoremap <Leader>va :vs %:p:s,.js$,.X123X,:s,.pug$,.js,:s,.X123X$,.pug,<CR>
-nnoremap <Leader>sa :split %:p:s,.js$,.X123X,:s,.pug$,.js,:s,.X123X$,.pug,<CR>
-nnoremap <Leader>ta :tabnew %:p:s,.js$,.X123X,:s,.pug$,.js,:s,.X123X$,.pug,<CR>
 
 """ change windows easily
 nnoremap <C-j> <C-w>j
@@ -206,14 +200,18 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 """ Symbol renaming.[Coc.nvim]
 nmap <leader>rn <Plug>(coc-rename)
 
-""" open new empty tab
-nmap <Leader>t :tab new<CR>
+""" open new tab using current file
+nmap <Leader>t :tabnew %<CR>
+
+""" set absolute path file in to clipboard
+nnoremap <leader>y :let @+=expand('%:p')<CR>
 
 """ search only files [fzf.vim]
 nmap <C-p> :Files<CR>
 
 """ search texts [fzf.vim]
-nmap <c-k> :Ag<CR>
+noremap <Leader>f :Ags --ignore-dir=node_modules --ignore-dir=dist --ignore-dir=.git<Space>
+noremap <Leader><Leader>f :AgsQuit<CR>
 
 """ open new tab with file selected [fzf.vim]
 nnoremap <silent> <C-t> :tabe <C-R>=fnameescape(fzf#vim#selected())<CR><CR>
