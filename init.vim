@@ -83,11 +83,14 @@ let g:coc_global_extensions = [
   \ 'coc-eslint', 
   \ 'coc-vetur', 
   \ 'coc-css', 
+  \ 'coc-jest', 
   \ ]
 let g:coc_user_config = {
 	\ 'diagnostic.errorSign': '❌',
   \ 'diagnostic.warningSign': '⚠️',
-  \ 'typescript.preferences.importModuleSpecifier': 'project-relative'
+  \ 'typescript.preferences.importModuleSpecifier': 'project-relative',
+  \ 'jest.watch': 0,
+  \ 'jest.terminalPosition': 'bottom'
 \ }
 
 """ [neoformat(pretty)]
@@ -203,11 +206,20 @@ nmap <leader>rn <Plug>(coc-rename)
 """ open new tab using current file
 nmap <Leader>t :tabnew %<CR>
 
+""" open new tab using current file
+nmap <Leader>s :split %<CR>
+
 """ set absolute path file in to clipboard
 nnoremap <leader>y :let @+=expand('%:p')<CR>
 
 """ search only files [fzf.vim]
 nmap <C-p> :Files<CR>
+
+""" Run jest for current test
+nnoremap <leader>to :call CocAction('runCommand', 'jest.singleTest')<CR>
+
+""" Run jest for all tests of current file
+nnoremap <leader>te :call CocAction('runCommand', 'jest.fileTest', ['%'])<CR>
 
 """ search texts [fzf.vim]
 noremap <Leader>f :Ags --ignore-dir=node_modules --ignore-dir=dist --ignore-dir=.git<Space>
