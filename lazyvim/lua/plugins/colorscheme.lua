@@ -1,16 +1,18 @@
 return {
-  -- install colors themes
   {
-    "AlexvZyl/nordic.nvim",
-    lazy = false,
-    priority = 1000,
+    "catppuccin/nvim",
+    name = "catppuccin",
+    config = function()
+      require("catppuccin").setup({
+        flavour = "mocha", -- latte, frappe, macchiato, mocha
+      })
+    end,
   },
 
-  -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "nordic",
+      colorscheme = "catppuccin",
     },
   },
 }
