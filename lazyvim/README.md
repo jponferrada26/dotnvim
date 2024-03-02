@@ -6,11 +6,20 @@ Configuration user for [LazyVim](https://www.lazyvim.org/)
 
 #### Requeriments
 * Neovim >= 0.9.0
-* Use Nerd Font(v3.0 or greater)
+* Use Nerd Font (I recommend  [JetBrains Mono](https://www.programmingfonts.org/#jetbrainsmono))
 * Install `gcc` (C compiler for nvim-treesitter).
 * For `telescope.nvim`
   * live grep: `ripgrep`
   * find files: `fd-find`
+
+Linux
+```shell
+sudo apt-get install -y gcc ripgrep fd-find
+```
+Macos
+```shell
+sudo brew install gcc ripgrep fd
+``` 
 
 #### Clone the repository
 
