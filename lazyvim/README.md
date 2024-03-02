@@ -5,7 +5,7 @@ Configuration user for [LazyVim](https://www.lazyvim.org/)
 ## 🛠️ Install
 
 #### Requeriments
-* Neovim >= 0.9.0
+* Neovim >= 0.9.0 ([INSTALL.md](https://github.com/neovim/neovim/blob/master/INSTALL.md))
 * Use Nerd Font (I recommend  [JetBrains Mono](https://www.programmingfonts.org/#jetbrainsmono))
 * For `telescope.nvim`
   * live grep: `ripgrep`
