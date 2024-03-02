@@ -7,19 +7,27 @@ Configuration user for [LazyVim](https://www.lazyvim.org/)
 #### Requeriments
 * Neovim >= 0.9.0
 * Use Nerd Font (I recommend  [JetBrains Mono](https://www.programmingfonts.org/#jetbrainsmono))
-* Install `gcc` (C compiler for nvim-treesitter).
 * For `telescope.nvim`
   * live grep: `ripgrep`
   * find files: `fd-find`
+* For `LuaShip`
+  * `make`
+* For `nvim-treesitter`
+  * `gcc` (C compiler for nvim-treesitter).
+  * `g++`
+  * `nodejs`
+
 
 Linux
 ```shell
-sudo apt-get install -y gcc ripgrep fd-find
+sudo apt-get install -y gcc ripgrep fd-find g++ make
 ```
 Macos
 ```shell
-sudo brew install gcc ripgrep fd
-``` 
+sudo brew install gcc ripgrep fd make
+```
+>[!NOTE]
+>For install `nodejs` I recommend use [nvm](https://github.com/nvm-sh/nvm)
 
 #### Clone the repository
 
