@@ -5,4 +5,9 @@ return {
     { "<leader>E", false },
     { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Explorer NeoTree (cwr)" },
   },
+  opts = {
+    window = {
+      position = "right",
+    },
+  },
 }
